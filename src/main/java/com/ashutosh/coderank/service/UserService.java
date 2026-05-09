@@ -28,6 +28,9 @@ public class UserService {
 
     public Users saveUser(UserDto userDto) {
 
+        if (userRepository.findByUserName(userDto.getUserName()).isPresent()) {
+            throw new UsersExceptions("Username already exists");
+        }
 
         Users user = new Users();
         user.setUserName(userDto.getUserName());
@@ -36,7 +39,7 @@ public class UserService {
         user.setCreated_at(LocalDateTime.now());
         user.setRole(UserConstant.ROLE_USER);
         userRepository.save(user);
-        return user;    
+        return user;
     }
 
     // Login API once the user registration as been completed
