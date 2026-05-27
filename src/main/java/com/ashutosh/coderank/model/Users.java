@@ -1,10 +1,10 @@
 package com.ashutosh.coderank.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -16,9 +16,16 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private  String userName;
+
+    @Column(unique = true, nullable = false)
+    private String userName;
+
+    @Column(nullable = false)
     private String password;
-    private  String email;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
     private LocalDateTime created_at;
     private String role;
 }

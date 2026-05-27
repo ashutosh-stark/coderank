@@ -1,5 +1,6 @@
 package com.ashutosh.coderank.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,7 +10,6 @@ import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -19,18 +19,29 @@ public class CodeSubmission {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private  String language;
+
+    private String language;
+
+    @Column(columnDefinition = "LONGTEXT")
     private String code;
+
     private String status;
+
     private LocalDateTime submissionDate;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
+
+    @Column(columnDefinition = "LONGTEXT")
     private String error;
+
     private Long executionTime;
     private LocalDateTime completedAt;
     private LocalDateTime createdAt;
     private Long retryCount = 0L;
+
+    @Column(columnDefinition = "LONGTEXT")
     private String output;
 
 }
